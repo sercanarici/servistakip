@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block page_header %}
+
+    <h1>Dashboard</h1>
+
+{% endblock %}
+
+{% block page_rows %}
+
+{% endblock %}
+
+{% block extraJS %}
+    <script>
+        $("ul.nav.navbar-collapse.collapse.bootstrap-admin-navbar-side > li a[href|='/']").parent().addClass("active");
+    </script>
+{% endblock %}

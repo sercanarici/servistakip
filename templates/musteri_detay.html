@@ -1,0 +1,297 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block page_header %}
+
+    <h1>Müşteri Detay</h1>
+
+{% endblock %}
+
+{% block page_rows %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#servisler" aria-controls="servisler" role="tab" data-toggle="tab">Servisler</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#anlasmalar" aria-controls="anlasmalar" role="tab" data-toggle="tab">Anlaşmalar</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#cihazservisler" aria-controls="cihazservisler" role="tab" data-toggle="tab">Cihaz
+                            Servis</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#hosting" aria-controls="hosting" role="tab" data-toggle="tab">Hosting</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="servisler">
+                        {% if musteri_servisler %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="text-muted bootstrap-admin-box-title"></div>
+                                            <a href="#" class="btn btn-primary">Yeni Servis Formu</a>
+                                        </div>
+                                        <div class="bootstrap-admin-panel-content">
+                                            <table class="table table-striped table-bordered" id="musteriler">
+                                                <thead>
+                                                <tr>
+                                                    <th>Firma Adı</th>
+                                                    <th>Belge no</th>
+                                                    <th>Tarih</th>
+                                                    <th>Kullanıcı</th>
+                                                    <th>İşlemler</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for servis in musteri_servisler %}
+                                                    <tr class="gradeA">
+                                                        <td>{{ servis.musteri }}</td>
+                                                        <td>{{ servis.belge_no }}</td>
+                                                        <td>{{ servis.baslangic_tarihi }}</td>
+                                                        <td>{{ servis.servis_sorumlusu }}</td>
+                                                        <td class="center">
+                                                            <a href="#" class="btn btn-xs btn-primary pull-left"><i
+                                                                    class="glyphicon glyphicon-pencil glyphicon-white"></i>
+                                                                Düzenle</a>
+                                                            <a href="#" class="btn btn-xs btn-danger pull right"><i
+                                                                    class="glyphicon glyphicon-remove glyphicon-white"></i>
+                                                                Sil</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="no-data">
+                                                Görüntülenecek veri yok
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="anlasmalar">
+                        {% if musteri_anlasmalar %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="text-muted bootstrap-admin-box-title"></div>
+                                            <a href="#" class="btn btn-primary">Yeni Bakım Anlaşması</a>
+                                        </div>
+                                        <div class="bootstrap-admin-panel-content">
+                                            <table class="table table-striped table-bordered" id="musteriler">
+                                                <thead>
+                                                <tr>
+                                                    <th>Firma Adı</th>
+                                                    <th>Anlaşma Tipi</th>
+                                                    <th>Başlangıç Tarihi</th>
+                                                    <th>Bitiş Tarihi</th>
+                                                    <th>Ödendi</th>
+                                                    <th>İşlemler</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for anlasma in musteri_anlasmalar %}
+                                                    <tr class="gradeA">
+                                                        <td>{{ anlasma.musteri }}</td>
+                                                        <td>{{ anlasma.anlasma_tip }}</td>
+                                                        <td>{{ anlasma.baslangic_tarihi }}</td>
+                                                        <td>{{ anlasma.bitis_tarihi }}</td>
+                                                        {% if anlasma.odendi %}
+                                                        <td class="center">
+                                                            <i class="glyphicon glyphicon-ok glyphicon-white" style="color: green;"></i>
+                                                        </td>
+                                                        {% else %}
+                                                        <td class="center">
+                                                        <i class="glyphicon glyphicon-remove glyphicon-white" style="color: red;"></i>
+                                                        </td>
+                                                        {% endif %}
+
+                                                        <td class="center">
+                                                            <a href="#" class="btn btn-xs btn-primary pull-left"><i
+                                                                    class="glyphicon glyphicon-pencil glyphicon-white"></i>
+                                                                Düzenle</a>
+                                                            <a href="#" class="btn btn-xs btn-danger pull right"><i
+                                                                    class="glyphicon glyphicon-remove glyphicon-white"></i>
+                                                                Sil</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="no-data">
+                                                Görüntülenecek veri yok
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="cihazservisler">
+                        {% if musteri_cihazlar %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="text-muted bootstrap-admin-box-title"></div>
+                                            <a href="#" class="btn btn-primary">Yeni Cihaz Servis Formu</a>
+                                        </div>
+                                        <div class="bootstrap-admin-panel-content">
+                                            <table class="table table-striped table-bordered" id="musteriler">
+                                                <thead>
+                                                <tr>
+                                                    <th>Cihaz Model</th>
+                                                    <th>Seri No</th>
+                                                    <th>Teslim Alınma Tarihi</th>
+                                                    <th>Teslim Alan</th>
+                                                    <th>Durumu</th>
+                                                    <th>İşlemler</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for cihaz in musteri_cihazlar %}
+                                                    <tr class="gradeA">
+                                                        <td>{{ cihaz.cihaz.model }}</td>
+                                                        <td>{{ cihaz.cihaz.seri_no }}</td>
+                                                        <td>{{ cihaz.verilis_tarihi }}</td>
+                                                        <td>{{ cihaz.teslim_alan }}</td>
+                                                        {% if cihaz.teslim_tarihi %}
+                                                            <td>Teslim Edildi</td>
+                                                        {% else %}
+                                                            <td>Teslim Edilmedi</td>
+                                                        {% endif %}
+                                                        <td class="center">
+                                                            <a href="#" class="btn btn-xs btn-primary pull-left"><i
+                                                                    class="glyphicon glyphicon-pencil glyphicon-white"></i>
+                                                                Düzenle</a>
+                                                            <a href="#" class="btn btn-xs btn-danger pull right"><i
+                                                                    class="glyphicon glyphicon-remove glyphicon-white"></i>
+                                                                Sil</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="no-data">
+                                                Görüntülenecek veri yok
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="hosting">
+                        {% if musteri_hostingler %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="text-muted bootstrap-admin-box-title"></div>
+                                            <a href="#" class="btn btn-primary">Yeni Hosting Kaydı</a>
+                                        </div>
+                                        <div class="bootstrap-admin-panel-content">
+                                            <table class="table table-striped table-bordered" id="musteriler">
+                                                <thead>
+                                                <tr>
+                                                    <th>Firma Adı</th>
+                                                    <th>Hosting Tipi</th>
+                                                    <th>Başlangıç Tarihi</th>
+                                                    <th>Bitiş Tarihi</th>
+                                                    <th>Ödeme Durumu</th>
+                                                    <th>İşlemler</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for hosting in musteri_hostingler %}
+                                                    <tr class="gradeA">
+                                                        <td>{{ hosting.musteri }}</td>
+                                                        <td>{{ hosting.hosting_tipi }}</td>
+                                                        <td>{{ hosting.baslangic_tarihi }}</td>
+                                                        <td>{{ hosting.bitis_tarihi }}</td>
+                                                        {% if hosting.odendi %}
+                                                            <td>Ödendi</td>
+                                                        {% else %}
+                                                            <td>Ödenmedi</td>
+                                                        {% endif %}
+                                                        <td class="center">
+                                                            <a href="#" class="btn btn-xs btn-primary pull-left"><i
+                                                                    class="glyphicon glyphicon-pencil glyphicon-white"></i>
+                                                                Düzenle</a>
+                                                            <a href="#" class="btn btn-xs btn-danger pull right"><i
+                                                                    class="glyphicon glyphicon-remove glyphicon-white"></i>
+                                                                Sil</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="no-data">
+                                                Görüntülenecek veri yok
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block extraJS %}
+    <script>
+        $("ul.nav.navbar-collapse.collapse.bootstrap-admin-navbar-side > li a[href|='/']").parent().addClass("active");
+    </script>
+{% endblock %}

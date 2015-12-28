@@ -15,7 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from app.views import *
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', index, name='home'),
+    url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^admin/', include(admin.site.urls), name='admin'),
+    #url(r'^anlasmalar/$', anlasmalar, name='anlasmalar'),
+    #url(r'^servisler/$', servisler, name='servisler'),
+    #url(r'^musteriler/$', musteriler, name='musteriler'),
+    #url(r'^musteri_detay/(?P<musteri_id>[0-9]+)/$', musteri_detay, name='mus_detay'),
+    #url(r'^cihazservisler/$', cihazservisler, name='cihazservisler'),
+    #url(r'^hosting/$', hostingler, name='hostingler'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
