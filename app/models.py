@@ -101,7 +101,7 @@ class ServisSekli(models.Model):
 
 
 class ServisForm(models.Model):
-    musteri = models.ForeignKey(Musteri, related_name="Servisler")
+    musteri = models.ForeignKey(Musteri, related_name="servisler")
     belge_no = models.CharField(max_length=10, blank=True)
     servis_tip = models.ForeignKey(ServisTip)
     servis_icerik = models.ForeignKey(ServisIcerik)
@@ -120,6 +120,7 @@ class ServisForm(models.Model):
 
     def __str__(self):
         return ": %s | %s | %s" %(self.musteri.firma_adi, self.baslangic_tarihi.strftime('%Y-%m-%d'), self.servis_sorumlusu)
+
 
     class Meta:
         verbose_name = "Servis Formu"

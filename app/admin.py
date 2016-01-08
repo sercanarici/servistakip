@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import Count
 from app.models import *
 
 @admin.register(BakimAnlasmaTip)
@@ -34,7 +35,7 @@ class LisansInline(admin.StackedInline):
 
 @admin.register(Musteri)
 class MusteriAdmin(admin.ModelAdmin):
-    list_display = ("firma_adi", "telefon", "yetkili" ,"adres",)
+    list_display = ("firma_adi", "telefon", "yetkili" ,"adres","servis_sayisi",)
     search_fields = ("firma_adi",)
     list_filter = ("firma_adi",)
     inlines = [
@@ -43,17 +44,26 @@ class MusteriAdmin(admin.ModelAdmin):
         LisansInline
     ]
 
+    def get_queryset(self, request):
+        return Musteri.objects.annotate(servis_count = Count('servisler'))
+
+    def servis_sayisi(self, obj):
+        return obj.servis_count
+    servis_sayisi.admin_order_field = 'servis_count'
+
 
 @admin.register(ServisForm)
 class ServisFormAdmin(admin.ModelAdmin):
-    list_display = ("musteri", "baslangic_tarihi", "servis_sorumlusu")
+    list_display = ("musteri", "baslangic_tarihi", "servis_sorumlusu", "belge_no",)
     raw_id_fields = ("musteri",)
     search_fields = ("musteri__firma_adi",)
+    list_filter = ("servis_sorumlusu",)
 
 
 class HostingAdmin(admin.ModelAdmin):
     list_display = ("musteri", "hosting_tipi", "baslangic_tarihi", "bitis_tarihi")
     raw_id_fields = ("musteri",)
+
 
 @admin.register(Lisans)
 class LisansAdmin(admin.ModelAdmin):
