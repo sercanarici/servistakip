@@ -48,6 +48,7 @@ class MusteriAdmin(admin.ModelAdmin):
 class ServisFormAdmin(admin.ModelAdmin):
     list_display = ("musteri", "baslangic_tarihi", "servis_sorumlusu")
     raw_id_fields = ("musteri",)
+    search_fields = ("musteri__firma_adi",)
 
 
 class HostingAdmin(admin.ModelAdmin):
