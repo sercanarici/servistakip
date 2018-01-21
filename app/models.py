@@ -15,6 +15,8 @@ class Musteri(models.Model):
     url = models.URLField(blank=True, null=True)
     adres = models.TextField(blank=True, null=True)
     notlar = models.TextField(blank=True, null=True)
+    bayi = models.ForeignKey("Bayi", related_name="musteriler")
+
 
     def __str__(self):
         return self.firma_adi
@@ -258,4 +260,45 @@ class Lisans(models.Model):
         verbose_name = "Lisans"
         verbose_name_plural = "Lisanslar"
         ordering = ('musteri','tarih', "lisans_no", )
+
+
+class Bayi(models.Model):
+    bayi_adi = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.bayi_adi
+
+    class Meta:
+        verbose_name ="Bayi"
+        verbose_name_plural = "Bayiler"
+        ordering = ('bayi_adi',)
+
+
+# class Gorev(models.Model):
+#     ONCELIK = [
+#         (1, 'Düşük'),
+#         (2, 'Orta'),
+#         (3, 'Acil'),
+#     ]
+#     DURUM = [
+#         (1, 'Açık'),
+#         (2, 'Beklemede'),
+#         (3, 'İnceleniyor'),
+#         (4, 'Tamamlandı'),
+#     ]
+#     kayit_eden = models.ForeignKey(User, related_name="gorevler")
+#     kayit_tarihi = models.DateTimeField(auto_now=True)
+#     oncelik = models.IntegerField(choices=ONCELIK)
+#     durum = models.IntegerField(choices=DURUM)
+
+
+
+
+
+# class GorusmeForm(models.Model):
+#     musteri = models.ForeignKey(Musteri, related_name="gorusmeler")
+#     user = models.ForeignKey(User, related_name="gorusmeler")
+#     tarih = models.DateTimeField(auto_now=True)
+#     notlar = models.TextField(blank=True, null=True)
+
 

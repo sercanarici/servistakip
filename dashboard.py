@@ -158,6 +158,7 @@ class OdakDashboard(Dashboard):
                     'app.models.BakimAnlasmaTip',
                     'app.models.HostingTip',
                     'app.models.Paket',
+                    'app.models.Bayi',
                 )
         ))
 

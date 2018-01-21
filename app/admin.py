@@ -35,9 +35,9 @@ class LisansInline(admin.StackedInline):
 
 @admin.register(Musteri)
 class MusteriAdmin(admin.ModelAdmin):
-    list_display = ("firma_adi", "telefon", "yetkili" ,"adres","servis_sayisi",)
+    list_display = ("firma_adi", "telefon", "yetkili" ,"adres","servis_sayisi","bayi",)
     search_fields = ("firma_adi",)
-    list_filter = ("firma_adi",)
+    list_filter = ("firma_adi","bayi",)
     inlines = [
         AnlasmaInline,
         ServisFormInline,
@@ -57,7 +57,7 @@ class ServisFormAdmin(admin.ModelAdmin):
     list_display = ("musteri", "baslangic_tarihi", "servis_sorumlusu", "belge_no",)
     raw_id_fields = ("musteri",)
     search_fields = ("musteri__firma_adi",)
-    list_filter = ("servis_sorumlusu",)
+    list_filter = ("servis_sorumlusu","musteri__bayi",)
 
 
 class HostingAdmin(admin.ModelAdmin):
@@ -116,4 +116,5 @@ admin.site.register(ServisIcerik)
 admin.site.register(ServisSekli)
 admin.site.register(HostingTip)
 admin.site.register(Paket)
+admin.site.register(Bayi)
 
