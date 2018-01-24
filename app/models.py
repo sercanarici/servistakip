@@ -17,7 +17,6 @@ class Musteri(models.Model):
     notlar = models.TextField(blank=True, null=True)
     bayi = models.ForeignKey("Bayi", related_name="musteriler")
 
-
     def __str__(self):
         return self.firma_adi
 

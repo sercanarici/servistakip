@@ -54,18 +54,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Bayi',
-            fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
-                ('bayi_adi', models.CharField(max_length=100, unique=True)),
-            ],
-            options={
-                'verbose_name_plural': 'Bayiler',
-                'verbose_name': 'Bayi',
-                'ordering': ('bayi_adi',),
-            },
-        ),
-        migrations.CreateModel(
             name='Cihaz',
             fields=[
                 ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
